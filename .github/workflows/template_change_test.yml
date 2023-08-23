@@ -1,0 +1,25 @@
+name: Rename Template
+
+on: pull_request
+
+jobs:
+  rename-template:
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set Up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: 17
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Rename
+        run: ./gradlew renameTemplate
+
+      - name: Build
+        run: ./gradlew build
