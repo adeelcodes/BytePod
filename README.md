@@ -1,72 +1,130 @@
-🚧  UNDER CONSTRUCTION 🚧
+## BytePod
 
-This project is a clone of the [Android App Template](https://github.com/adammc331/androidapptemplate) but will be intended for use to setup a KMM mobile application. 
+BytePod is a mobile application that allows users to create, listen and share short audio podcasts with their friends. The application is built using Kotlin Multiplatform (KMP) and will be available for both Android and iOS.
 
-# Android App Template
+## Getting Started
 
-This is a GitHub template repository intended to kickstart development on an Android application. This project comes set with a handful of tools that [Adam](https://github.com/AdamMc331) finds important and relevant to every project. If you think something is missing, or feel strongly that a setup should be changed, please submit an [Issue](https://github.com/AdamMc331/AndroidAppTemplate/issues/new).
+### Prerequisite
+* Mac machine
+* [Homebrew](https://brew.sh/)
+* Kdoctor
+* Ruby 2.7
+* Cocoapods
+* Android Studio
+* KMM plugin
+* XCode
 
-## Why This Template?
+A detailed tutorial on the setup can be seen here as well: https://youtu.be/7Wl-G8aXxDA
 
-The purpose of this template is to avoid any opinions on writing code. The developers should have the freedom to choose their own architecture, third party dependencies, package structure, and more. 
+### Installation
 
-This template _is_ opinionated about developer tooling. Dependency management is configured, git hooks are defined, code formatting and static analysis are all there, and it even has pull request templates. The purpose of this repo is to help you get started building your next project with confidence in your code, and not telling you how to write it. 
+If Brew isn't installed then install it like this
 
-## Walkthrough
+#### Brew
+```console
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+#### Kdoctor
+Kdoctor can be installed like this
 
-If you'd like a video walk through of this template and all it has to offer, you can find that on YouTube. 
-
-https://youtu.be/E0iMUWJn76E
-
-## Using This Template
-
-To use this template in your own project, click the "Use this template" button at the top right of the repository. Once you do, a repository will be created for your account that you can clone and use on your device.
-
-To setup this repository to your needs, open the [setup.gradle](buildscripts/setup.gradle) file 
-and tweak the `renameConfig` block to your needs. After that, you can run the `renameTemplate` 
-gradle task to have the app module's package name and relevant strings replaced.
-
-### Cleanup
-
-After [this PR](https://github.com/AdamMc331/AndroidAppTemplate/pull/44), running the renameTemplate
-task should do all the necessary cleanup like deleting the setup file and test workflow so you can 
-go ahead and commit the renamed files and be on your way. If you encounter any problems with the setup
-workflow, please report a new [issue](https://github.com/AdamMc331/AndroidAppTemplate/issues).
-
-## What's Included
-
-A number of third party dependencies are included in this template. They are also documented inside the [documentation folder](/documentation). The files inside this documentation folder are written in such a way that you can keep them in your real project, to let team members read up on why dependencies are included and how they work.
-
-The dependencies in the template include:
-
-* [Ktlint](/documentation/StaticAnalysis.md) for formatting.
-* [Detekt](/documentation/StaticAnalysis.md) for code smells.
-* [Git Hooks](/documentation/GitHooks.md) for automatically perform static analysis checks. 
-* [Gradle Versions Plugin](/documentation/VersionsPlugin.md) for checking all dependencies for new versions.
-* [GitHub Actions](/documentation/GitHubActions.md) for running continuous integration and ensuring code quality with every PR.
-* [LeakCanary](https://square.github.io/leakcanary/) for detecting memory leaks. 
-
-### Danger
-
-This template uses [Danger](https://danger.systems) which will perform some checks against our 
-pull requests. You can find the list of checks in the [Dangerfile](Dangerfile). In addition, we 
-have a GitHub Actions workflow for Danger checks. In order for that to work, you'll need a 
-Danger API key setup in your GitHub secrets. Info on this can be found [here](https://www.jessesquires.com/blog/2020/04/10/running-danger-on-github-actions/). 
-
-### Templates
-
-There are also templates within this template. This repo comes shipped with a [Pull Request Template](/.github/pull_request_template.md) that will help you and your team write organized and detailed pull request descriptions. 
-
-## Dependency Setup
-
-You may notice that dependencies are set up in a very specific way. Each of the tools has its own Gradle file in the [buildscripts folder](/buildscripts). This is by design so that if you chose to have a multi module project, these dependencies can easily be shared between them. This is already configured inside our root `build.gradle.kts` file, by applying to each sub project:
-
-```groovy
-subprojects {
-    apply from: "../buildscripts/detekt.gradle"
-    apply from: "../buildscripts/versionsplugin.gradle"
-}
+```console
+brew install kdoctor
 ```
 
-In addition, all of the app module dependencies are defined using a gradle version catalog, found in this [toml](gradle/libs.versions.toml) file.
+#### Ruby 2.7
 
+1. Install rbenv - Ruby version manager
+2. Install Ruby 2.7
+3. Mark 2.7 as global Ruby version
+4. Verify
+5. Close the terminal and open again - optional
+
+```console
+# 1
+brew install rbenv
+rbenv init
+
+# 2
+rbenv install 2.7
+
+# 3
+rbenv global 2.7
+
+# 4
+
+ruby -v
+```
+Further instructions can be found here: https://antran.app/2021/m1_mac_part2/
+
+NB: If you see that the Ruby version isn't 2.7 then you will probably have to enter env variables in bash/zsh manually like below
+```console
+nano ~/.zshrc
+```
+**Paste the following**
+```console
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+export PATH="/Users/[your_user_name]/.rbenv/shims:${PATH}"
+```
+
+#### Cocoapods
+
+```console
+sudo gem install cocoapods
+```
+
+#### Android Studio
+
+https://developer.android.com/studio
+
+#### KMM plugin
+
+After Android studio is installed, proceed to Preferences > Plugins > search for `kotlin multiplatform mobile` install and enable.
+
+#### Xcode
+
+- Available in App Store.
+- Download from https://developer.apple.com/xcode/
+
+After installing all the above if you type `kdoctor` in the terminal, you will see that all the dependencies are fulfilled.
+
+### Running the apps
+
+Clone the project from GitHub https://github.com/adeelcodes/BytePod.git
+
+**Android**
+
+Open Android Studio > Open project > Press play on Android app.
+If running the Android application fails then ensure that the JDK used is 11+.
+The setting can be checked from Android Studio via File > Project Structure > SDK Location > JDK section.
+
+If the JDK version is incorrect then Gradle might fail to resolve all the plugins. It will indicate this with the appropriate error.
+If that is the case then set the JDK version as mentioned above.
+
+> Could not resolve com.rickclephas.kmp:kmp-nativecoroutines-gradle-plugin:0.13.2.
+
+If the podInstall task fails then a potential fix is to run **pod repo update** from the command line.
+
+```
+Execution failed for task ':shared:podInstall'.
+> 'pod install' command failed with code 31.
+  Full command: pod install
+  Error message:
+  Analyzing dependencies
+  [!] CocoaPods could not find compatible versions for pod "SwiftLint":
+    In snapshot (Podfile.lock):
+      SwiftLint (= 0.49.1)
+    In Podfile:
+      SwiftLint
+  None of your spec sources contain a spec satisfying the dependencies: `SwiftLint, SwiftLint (= 0.49.1)`.
+  You have either:
+   * out-of-date source repos which you can update with `pod repo update` or with `pod install --repo-update`.
+   * mistyped the name or version.
+   * not added the source repo that hosts the Podspec to your Podfile.
+          Please, check that podfile contains following lines in header:
+          source 'https://cdn.cocoapods.org'
+```
+
+**iOS**
+
+Open Xcode and open iosApp > `iosApp.xcworkspace` file. Press Build and it should run the app.
